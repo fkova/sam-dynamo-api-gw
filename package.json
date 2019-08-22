@@ -1,0 +1,29 @@
+{
+  "name": "sam-dynamo-apigw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "../handler.js",
+  "scripts": {
+    "start": "npm run build && npm run package && npm run deploy",
+    "test": "jest unit",
+    "create-bucket": "aws s3 mb s3://rahzel-package --region us-east-2",
+    "build": "sam build -t sam.yaml",
+    "build2": "webpack",
+    "package": "sam package --output-template sam.yaml --s3-bucket rahzel-package",
+    "deploy": "sam deploy --template-file sam.yaml --region us-east-2 --capabilities CAPABILITY_IAM --stack-name sam-dynamo-apigw",
+    "delete-stack": "aws --region us-east-2 cloudformation delete-stack --stack-name sam-dynamo-apigw"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.514.0",
+    "jest": "^24.9.0",
+    "loadash": "^1.0.0",
+    "rewire": "^4.0.1",
+    "webpack": "^4.39.2"
+  }
+}
