@@ -1,9 +1,18 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Description: A simple backend with a RESTful API endpoint using Amazon API Gateway.
+Globals:
+  Function:
+    MemorySize: 512
+    Timeout: 10
+Outputs:
+  Api:
+    Description: url endpoint to test stack
+    Value:
+      Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/
 Resources:
   dbManagerService:
     Properties:
-      CodeUri: s3://rahzel-package/d0cf692ce3044419ba311e4365ebc1b4
+      CodeUri: s3://rahzel-package/8663995a8dfc4028629f25dd48ff4602
       Description: A simple backend with a RESTful API endpoint using Amazon API Gateway.
       Events:
         Api1:
@@ -17,7 +26,6 @@ Resources:
             Path: /api/{itemId}
           Type: Api
       Handler: handler.dbManagerLambda
-      MemorySize: 512
       Policies:
       - Statement:
         - Action:
@@ -36,7 +44,6 @@ Resources:
               - :table/myItems
         Version: '2012-10-17'
       Runtime: nodejs8.10
-      Timeout: 10
     Type: AWS::Serverless::Function
   myItems:
     Properties:
