@@ -12,7 +12,7 @@ Outputs:
 Resources:
   dbManagerService:
     Properties:
-      CodeUri: s3://rahzel-package/8663995a8dfc4028629f25dd48ff4602
+      CodeUri: s3://rahzel-package/1e7da8a76678093b4fc3a68505d7ec72
       Description: A simple backend with a RESTful API endpoint using Amazon API Gateway.
       Events:
         Api1:
