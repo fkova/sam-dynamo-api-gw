@@ -5,6 +5,8 @@
   "main": "../handler.js",
   "scripts": {
     "start": "npm run build && npm run package && npm run deploy",
+    "local-invoke": "sam local invoke dbManagerService --event ../tests/events/event.json",
+    "local-api": "sam local start-api",
     "test": "jest unit",
     "create-bucket": "aws s3 mb s3://rahzel-package --region us-east-2",
     "build": "sam build -t ../sam.yml",
