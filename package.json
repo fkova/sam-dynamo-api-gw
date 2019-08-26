@@ -1,0 +1,41 @@
+{
+  "name": "sam-dynamo-apigw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "../handler.js",
+  "scripts": {
+    "start": "npm run build && npm run package && npm run deploy",
+    "local-invoke": "sam local invoke dbManagerService --event ./test/events/event.json",
+    "local-api": "sam local start-api",
+    "test": "jest unit",
+    "create-bucket": "aws s3 mb s3://rahzel-package --region us-east-2",
+    "build": "webpack",
+    "build-sam": "sam build -t ./sam.yml -m package.json",
+    "package": "sam package --template-file ./sam.yml --output-template sam.packaged.yml --s3-bucket rahzel-package",
+    "deploy": "sam deploy --template-file sam.packaged.yml --region us-east-2 --capabilities CAPABILITY_IAM --stack-name sam-dynamo-apigw",
+    "delete-stack": "aws --region us-east-2 cloudformation delete-stack --stack-name sam-dynamo-apigw"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.31",
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.2",
+    "aws-sdk": "^2.514.0",
+    "jest": "^24.9.0",
+    "loadash": "^1.0.0",
+    "rewire": "^4.0.1",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^6.0.4",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.19.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.5.3",
+    "webpack": "^4.39.2",
+    "webpack-cli": "^3.3.7"
+  }
+}

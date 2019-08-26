@@ -1,18 +1,24 @@
 AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
 Description: A simple backend with a RESTful API endpoint using Amazon API Gateway.
+
 Globals:
   Function:
     MemorySize: 512
     Timeout: 10
+
 Outputs:
   Api:
     Description: url endpoint to test stack
     Value:
       Fn::Sub: https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/api/
+
 Resources:
   dbManagerService:
+    Type: AWS::Serverless::Function
     Properties:
-      CodeUri: src/
+      Handler: src/handler.dbManagerLambda
+      CodeUri: ./src
       Description: A simple backend with a RESTful API endpoint using Amazon API Gateway.
       Events:
         Api1:
@@ -25,7 +31,7 @@ Resources:
             Method: ANY
             Path: /api/{itemId}
           Type: Api
-      Handler: handler.dbManagerLambda
+      
       Policies:
       - Statement:
         - Action:
@@ -44,7 +50,7 @@ Resources:
               - :table/myItems
         Version: '2012-10-17'
       Runtime: nodejs8.10
-    Type: AWS::Serverless::Function
+    
   myItems:
     Properties:
       AttributeDefinitions:
@@ -58,4 +64,3 @@ Resources:
         WriteCapacityUnits: 1
       TableName: myItems
     Type: AWS::DynamoDB::Table
-Transform: AWS::Serverless-2016-10-31
