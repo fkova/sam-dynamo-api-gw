@@ -17,8 +17,8 @@ Resources:
   dbManagerService:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handler.dbManagerLambda
-      CodeUri: ./src
+      Handler: handler.dbManagerLambda
+      CodeUri: ./dist
       Description: A simple backend with a RESTful API endpoint using Amazon API Gateway.
       Events:
         Api1:

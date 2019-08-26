@@ -1,0 +1,4 @@
+"build-sam": "sam build -t ./sam.yml -m package.json"
+"build-webpack": webpack
+"local-invoke": "sam local invoke dbManagerService --event ./test/events/event.json",
+"local-api": "sam local start-api",

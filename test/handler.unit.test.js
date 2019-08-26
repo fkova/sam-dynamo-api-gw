@@ -1,7 +1,7 @@
 'use strict';
 
 var rewire = require('rewire');
-var app = rewire('../handler.js');
+var app = rewire('../dist/handler.js');
 
 const sendResponse = app.__get__('sendResponse');
 

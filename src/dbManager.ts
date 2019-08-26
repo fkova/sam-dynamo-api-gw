@@ -1,18 +1,11 @@
-'use strict';
 
-const AWS = require('aws-sdk');
+import AWS from 'aws-sdk';
 AWS.config.region = 'us-east-2';
-//AWS.config.endpoint = 'http://localhost:8000';
 
-let dynamo = new AWS.DynamoDB.DocumentClient();
-
+const dynamo = new AWS.DynamoDB.DocumentClient();
 const TABLE_NAME = 'myItems';
 
-module.exports.initializateDynamoClient = newDynamo => {
-	dynamo = newDynamo;
-};
-
-module.exports.saveItem = item => {
+module.exports.saveItem = (item: any) => {
 	const params = {
 		TableName: TABLE_NAME,
 		Item: item
@@ -26,7 +19,7 @@ module.exports.saveItem = item => {
 		});
 };
 
-module.exports.getItem = itemId => {
+module.exports.getItem = (itemId: string) => {
 	const params = {
 		Key: {
 			itemId: itemId
@@ -43,7 +36,7 @@ module.exports.getItem = itemId => {
 };
 
 
-module.exports.deleteItem = itemId => {
+module.exports.deleteItem = (itemId: string) => {
 	const params = {
 		Key: {
 			itemId: itemId
@@ -54,7 +47,7 @@ module.exports.deleteItem = itemId => {
 	return dynamo.delete(params).promise();
 };
 
-module.exports.updateItem = (itemId, paramsName, paramsValue) => {
+module.exports.updateItem = (itemId: string, paramsName: any, paramsValue: any) => {
 	const params = {
 		TableName: TABLE_NAME,
 		Key: {

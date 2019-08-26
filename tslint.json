@@ -1,0 +1,25 @@
+{
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended",
+        "tslint-config-prettier"
+    ],
+    "jsRules": {},
+    "rules": {
+        "align": false,
+        "trailing-comma": false,
+        "interface-name": false,
+        "no-console": false,
+        "prettier": true,
+        "quotemark": [true, "single"]
+    },
+    "linterOptions": {
+        "exclude": [
+          "*.json",
+          "**/*.json"
+        ]
+    },
+    "rulesDirectory": [
+        "tslint-plugin-prettier"
+    ]
+}
