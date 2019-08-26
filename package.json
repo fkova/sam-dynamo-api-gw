@@ -4,13 +4,11 @@
   "description": "",
   "main": "./src/handlerf.js",
   "scripts": {
-    "bpd": "tsc &&npm run package && npm run deploy",
+    "bpd": "tsc && npm run package && npm run deploy",
     "test": "jest unit",
-    "create-bucket": "aws s3 mb s3://rahzel-package --region us-east-2",
     "build": "tsc",
     "package": "sam package --template-file ./sam.yml --output-template sam.packaged.yml --s3-bucket rahzel-package",
-    "deploy": "sam deploy --template-file sam.packaged.yml --region us-east-2 --capabilities CAPABILITY_IAM --stack-name sam-dynamo-apigw",
-    "delete-stack": "aws --region us-east-2 cloudformation delete-stack --stack-name sam-dynamo-apigw"
+    "deploy": "sam deploy --template-file sam.packaged.yml --region us-east-2 --capabilities CAPABILITY_IAM --stack-name sam-dynamo-apigw"
   },
   "keywords": [],
   "author": "",
