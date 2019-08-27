@@ -22,7 +22,7 @@ module.exports = {
     extensions: ['.ts', '.js']
   },
   output: {
-    filename: "index.js",
+    filename: "handler.js",
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'commonjs2'
   }
