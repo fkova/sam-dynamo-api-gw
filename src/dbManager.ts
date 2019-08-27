@@ -5,7 +5,7 @@ AWS.config.region = 'us-east-2';
 const dynamo = new AWS.DynamoDB.DocumentClient();
 const TABLE_NAME = 'myItems';
 
-module.exports.saveItem = (item: any) => {
+module.exports.saveItem = async (item: any) => {
 	const params = {
 		TableName: TABLE_NAME,
 		Item: item
@@ -16,10 +16,10 @@ module.exports.saveItem = (item: any) => {
 		.promise()
 		.then(() => {
 			return item.itemId;
-		});
+		}).catch(e => e);
 };
 
-module.exports.getItem = (itemId: string) => {
+module.exports.getItem = async (itemId: string) => {
 	const params = {
 		Key: {
 			itemId: itemId
@@ -36,7 +36,7 @@ module.exports.getItem = (itemId: string) => {
 };
 
 
-module.exports.deleteItem = (itemId: string) => {
+module.exports.deleteItem = async (itemId: string) => {
 	const params = {
 		Key: {
 			itemId: itemId
@@ -47,7 +47,7 @@ module.exports.deleteItem = (itemId: string) => {
 	return dynamo.delete(params).promise();
 };
 
-module.exports.updateItem = (itemId: string, paramsName: any, paramsValue: any) => {
+module.exports.updateItem = async (itemId: string, paramsName: any, paramsValue: any) => {
 	const params = {
 		TableName: TABLE_NAME,
 		Key: {

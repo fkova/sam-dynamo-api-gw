@@ -1,9 +1,15 @@
-//export interface Event { name: string;}
-
 import { v1 as uuid } from 'uuid';
 const databaseManager = require('./dbManager');
 
-export const dbManagerLambda = async (event: any = {}): Promise<any> => {
+interface apiEventValidator {
+	body: string
+	httpMethod: string,
+	pathParameters: {
+		itemId: string
+	}
+}
+
+const dbManagerLambda = async (event: apiEventValidator): Promise<any> => {
 
     switch(event.httpMethod) {
 		case 'DELETE':
@@ -23,39 +29,32 @@ export const dbManagerLambda = async (event: any = {}): Promise<any> => {
     }
 };
 
-async function saveItem(event: any) {
-	var responseBody;
+async function saveItem(event: apiEventValidator) {
+	if(!event)return "no event";
 
-	if(event){
-		try{
-			responseBody = JSON.parse(event.body);
-		}catch(e){
-			responseBody = event.body;
-		}
-	}else{
-		return "no event";
-	}
-	
-	responseBody.itemId = uuid();
+	var responseBody = JSON.parse(event.body);
+
+	if(!responseBody.itemId){
+		responseBody.itemId = uuid();
+	}	
 
 	return await databaseManager.saveItem(responseBody);
 }
 
-async function getItem(event: any) {
+async function getItem(event: apiEventValidator) {
+	if(!event) return "no event";
+
 	const itemId = event.pathParameters.itemId;
-	
 	return await databaseManager.getItem(itemId);
 }
 
 async function deleteItem(event: any) {
 	const itemId = event.pathParameters.itemId;
-
 	return await databaseManager.deleteItem(itemId)
 }
 
 async function updateItem(event: any) {
 	const itemId = event.pathParameters.itemId;
-
 	const body = JSON.parse(event.body);
 	const paramName = body.paramName;
 	const paramValue = body.paramValue;
@@ -71,6 +70,7 @@ function sendResponse(statusCode: any, message: any){
 }
 
 module.exports = {
+	dbManagerLambda,
 	saveItem,
 	getItem,
 	deleteItem,
