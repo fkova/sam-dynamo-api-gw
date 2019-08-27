@@ -4,15 +4,23 @@ var rewire = require('rewire');
 var app = rewire('../dist/handler.js');
 
 const sendResponse = app.__get__('sendResponse');
+const saveItem = app.__get__('saveItem');
 
-describe('dbManagerLambda', () => {
+describe('sendResponse', () => {
     test('sendresponse should response with object', () => {
         expect(sendResponse(404,"error occured")).toEqual({statusCode: 404,body: "\"error occured\""});
     });
 });
 
-describe('dbManager', () => {
-    test('not specified',  () => {
-        //const greet = await greeter.sayHelloAndRecord('Marcia');
+describe('saveItem', () => {
+    test('with empty event', async () => {
+       console.log(saveItem({}));
     });
 });
+/*
+describe('GET', () => {
+    test('sendresponse should response with object', () => {
+        expect(sendResponse(404,"error occured")).toEqual({statusCode: 404,body: "\"error occured\""});
+    });
+});
+*/
