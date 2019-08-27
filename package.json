@@ -6,6 +6,7 @@
   "scripts": {
     "bpd": "tsc && npm run package && npm run deploy",
     "test": "jest unit",
+    "test-int": "jest int",
     "build": "tsc",
     "package": "sam package --template-file ./sam.yml --output-template sam.packaged.yml --s3-bucket rahzel-package",
     "deploy": "sam deploy --template-file sam.packaged.yml --region us-east-2 --capabilities CAPABILITY_IAM --stack-name sam-dynamo-apigw"
@@ -22,6 +23,7 @@
     "@types/node": "^12.7.2",
     "@types/uuid": "^3.4.5",
     "aws-sdk": "^2.514.0",
+    "axios": "^0.19.0",
     "jest": "^24.9.0",
     "loadash": "^1.0.0",
     "ts-jest": "^24.0.2",
