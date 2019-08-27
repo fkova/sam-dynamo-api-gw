@@ -24,17 +24,21 @@ export const dbManagerLambda = async (event: any = {}): Promise<any> => {
 };
 
 async function saveItem(event: any) {
-	var item;
+	var responseBody;
 
-	try{
-		item = JSON.parse(event.body);
-	}catch(e){
-		item = event.body;
+	if(event){
+		try{
+			responseBody = JSON.parse(event.body);
+		}catch(e){
+			responseBody = event.body;
+		}
+	}else{
+		return "no event";
 	}
 	
-	item.itemId = uuid();
+	responseBody.itemId = uuid();
 
-	return await databaseManager.saveItem(item);
+	return await databaseManager.saveItem(responseBody);
 }
 
 async function getItem(event: any) {
@@ -64,4 +68,12 @@ function sendResponse(statusCode: any, message: any){
 		statusCode: statusCode,
 		body: JSON.stringify(message)
 	}
+}
+
+module.exports = {
+	saveItem,
+	getItem,
+	deleteItem,
+	updateItem,
+	sendResponse
 }

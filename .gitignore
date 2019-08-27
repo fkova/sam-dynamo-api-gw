@@ -2,4 +2,4 @@ node_modules
 .aws-sam
 package-lock.json
 sam.packaged.yml
-dist
+dist/*.js
