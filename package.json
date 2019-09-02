@@ -5,11 +5,10 @@
   "main": "./src/handlerf.js",
   "scripts": {
     "bpd": "npm run build && npm run package && npm run deploy",
-    "test": "jest unit",
-    "test-cov": "jest unit --verbose --coverage",
+    "test": "jest --verbose",
+    "test-cov": "jest --verbose --coverage",
     "test-int": "jest int",
     "build": "webpack",
-    "pretest": "tsc",
     "package": "sam package --template-file ./sam.yml --output-template sam.packaged.yml --s3-bucket rahzel-package",
     "deploy": "sam deploy --template-file sam.packaged.yml --region us-east-2 --capabilities CAPABILITY_IAM --stack-name sam-dynamo-apigw"
   },
@@ -39,7 +38,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|tsx?)$",
+    "testRegex": "./test/.*.ts$",
     "moduleFileExtensions": [
       "ts",
       "tsx",

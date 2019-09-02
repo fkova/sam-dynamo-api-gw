@@ -36,7 +36,7 @@ export class ItemService {
         return (await this.dynamoDbClient.get(params).promise()).Item
     }
 
-    async updateItem (id: string, newName: string): Promise<any> {
+    async updateItem (id: string, name: string): Promise<any> {
         let params = {
             TableName: tableName,
             Key: {
@@ -44,7 +44,7 @@ export class ItemService {
             },
             UpdateExpression: 'set item_name = :v',
             ExpressionAttributeValues: {
-                ':v': newName
+                ':v': name
             },
             ReturnValues: 'UPDATED_NEW'
         };
