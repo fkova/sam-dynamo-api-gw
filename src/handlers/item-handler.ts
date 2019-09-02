@@ -3,7 +3,7 @@ import { ResponseFactory } from '../factories/response-factory';
 import { IItemService } from '../services/item-service';
  
 export default (itemService: IItemService): Handler<APIGatewayProxyEvent, APIGatewayProxyResult> => {
-    return async(event) =>{      
+    return async(event) => {      
         
         try{
             switch(event.httpMethod) {
@@ -25,6 +25,7 @@ export default (itemService: IItemService): Handler<APIGatewayProxyEvent, APIGat
                         item_id: result.item_id,
                         item_name: result.item_name
                     };
+
                     return ResponseFactory.generateSuccessResponse(responseBody);
 
                 case 'POST':

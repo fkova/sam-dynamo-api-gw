@@ -2,7 +2,7 @@
   "name": "sam-dynamo-apigw",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/handlerf.js",
+  "main": "./dist/index.js",
   "scripts": {
     "bpd": "npm run build && npm run package && npm run deploy",
     "test": "jest --verbose",
