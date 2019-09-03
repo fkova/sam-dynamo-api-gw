@@ -1,13 +1,13 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/handler.ts',
+  entry: './src/index.ts',
   mode: 'development',
   target: 'node',
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: [/node_modules/]
       },
@@ -18,11 +18,20 @@ module.exports = {
     'awslambda': 'awslambda',
     'dynamodb-doc': 'dynamodb-doc'
   },
+  node: {
+    // Allow these globals.
+    __filename: false,
+    __dirname: false
+  },
   resolve: {
-    extensions: ['.ts', '.js']
+    extensions: ['.tsx', '.ts', '.js']
+  },
+  optimization: {
+    minimize: false,
+    namedModules: true
   },
   output: {
-    filename: "handler.js",
+    filename: "index.js",
     path: path.resolve(__dirname, 'dist'),
     libraryTarget: 'commonjs2'
   }

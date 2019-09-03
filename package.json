@@ -2,13 +2,13 @@
   "name": "sam-dynamo-apigw",
   "version": "1.0.0",
   "description": "",
-  "main": "./src/handlerf.js",
+  "main": "./dist/index.js",
   "scripts": {
     "bpd": "npm run build && npm run package && npm run deploy",
-    "test": "jest unit",
+    "test": "jest --verbose",
+    "test-cov": "jest --verbose --coverage",
     "test-int": "jest int",
     "build": "webpack",
-    "pretest": "tsc",
     "package": "sam package --template-file ./sam.yml --output-template sam.packaged.yml --s3-bucket rahzel-package",
     "deploy": "sam deploy --template-file sam.packaged.yml --region us-east-2 --capabilities CAPABILITY_IAM --stack-name sam-dynamo-apigw"
   },
@@ -30,11 +30,25 @@
     "ts-jest": "^24.0.2",
     "ts-loader": "^6.0.4",
     "ts-node": "^8.3.0",
-    "tslint": "^5.19.0",
-    "tslint-config-prettier": "^1.18.0",
-    "tslint-plugin-prettier": "^2.0.1",
     "typescript": "^3.5.3",
     "webpack": "^4.39.2",
     "webpack-cli": "^3.3.7"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "./test/.*.ts$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ]
   }
 }
