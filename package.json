@@ -5,9 +5,9 @@
   "main": "./dist/index.js",
   "scripts": {
     "bpd": "npm run build && npm run package && npm run deploy",
-    "test": "jest --verbose",
-    "test-cov": "jest --verbose --coverage",
-    "test-int": "jest int",
+    "test": "jest test/.*.test.ts",
+    "test-cov": "jest test/.*.test.ts --coverage",
+    "test-int": "jest test/item-handler.int.ts",
     "build": "webpack",
     "package": "sam package --template-file ./sam.yml --output-template sam.packaged.yml --s3-bucket rahzel-package",
     "deploy": "sam deploy --template-file sam.packaged.yml --region us-east-2 --capabilities CAPABILITY_IAM --stack-name sam-dynamo-apigw"
@@ -24,6 +24,7 @@
     "@types/node": "^12.7.2",
     "@types/uuid": "^3.4.5",
     "aws-sdk": "^2.514.0",
+    "aws-sdk-mock": "^4.5.0",
     "axios": "^0.19.0",
     "jest": "^24.9.0",
     "loadash": "^1.0.0",

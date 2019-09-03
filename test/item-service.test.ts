@@ -25,8 +25,7 @@ describe('Testing item service', () => {
         mockDbPutMethod.mockReturnValue({
             promise() {
                 return Promise.resolve({
-                        "status": 200,
-                        "message": "OK"
+                    "item_name": name
                 });
             }
         });
@@ -34,8 +33,7 @@ describe('Testing item service', () => {
         const result = await itemService.createItem(name);
 
         expect(result).toMatchObject({
-                "status": 200,
-                "message": "OK"
+                "item_name": name
         });
     });
 

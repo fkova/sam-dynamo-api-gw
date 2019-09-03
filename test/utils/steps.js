@@ -1,6 +1,6 @@
 'use strict';
 
-const APP_ROOT = '../../src';
+const APP_ROOT = '../../../src';
 const _ = require('lodash');
 
 function viaHandler(event, functionName) {

@@ -32,8 +32,8 @@ export default (itemService: IItemService): Handler<APIGatewayProxyEvent, APIGat
                     if (!event.body){
                         return ResponseFactory.generateBadRequestResponse('Missing body!');
                     } 
-                    await itemService.createItem(JSON.parse(event.body).item_name);
-                    return ResponseFactory.generateSuccessResponse({});
+                    let res = await itemService.createItem(JSON.parse(event.body).item_name);
+                    return ResponseFactory.generateSuccessResponse(res);
 
                 case 'PUT':
                     if (!event.pathParameters|| !event.body){

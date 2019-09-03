@@ -14,15 +14,17 @@ export class ItemService {
     constructor (private dynamoDbClient: DocumentClient) {};
 
     async createItem ( name: String ): Promise<any> {
+        const new_id = uuid();
         let params = {
             TableName: tableName,
             Item: {
-                item_id: uuid(),
+                item_id: new_id,
                 item_name: name
-            }
+            },
+            ReturnValues: "ALL_OLD"
         };
 
-        return await this.dynamoDbClient.put(params).promise()
+        return await this.dynamoDbClient.put(params).promise().then(() => params.Item );
     }
 
     async readItem (id: string): Promise<any> {
