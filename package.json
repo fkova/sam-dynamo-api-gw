@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ajv": "^6.10.2",
     "uuid": "^3.3.3"
   },
   "devDependencies": {

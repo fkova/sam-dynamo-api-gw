@@ -4,6 +4,14 @@ import { APIGatewayProxyEvent, APIGatewayProxyResult, Context, Callback } from '
 import { DynamoDB } from 'aws-sdk';
 const documentClient = new DynamoDB.DocumentClient();
 let mockItemService: IItemService;
+import ajv from 'ajv';
+import { SchemaValidatorService } from '../src/services/schema-validator-service';
+
+const jsonSchemaValidatorService = new SchemaValidatorService(
+    new ajv({
+        allErrors: true,
+        format: 'full'
+    }));
 
 describe('Lambda unit testing', () => {
     beforeAll(()=>{
@@ -159,7 +167,7 @@ describe('Lambda unit testing', () => {
 });
 
 const callLambda = async (event: APIGatewayProxyEvent) => {
-    return await handler(mockItemService)(
+    return await handler(mockItemService, jsonSchemaValidatorService)(
         event,
         undefined as unknown as Context, 
         undefined as unknown as Callback<APIGatewayProxyResult>
